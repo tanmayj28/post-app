@@ -1,0 +1,9 @@
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+/db/*.sqlite3
+!/log/.keep
+!/tmp/.keep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
