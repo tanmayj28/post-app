@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_043538) do
+ActiveRecord::Schema.define(version: 2019_11_23_122037) do
 
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "visitor_id"
+    t.integer "upvotes_count"
+    t.string "title"
   end
 
   create_table "upvotes", force: :cascade do |t|
