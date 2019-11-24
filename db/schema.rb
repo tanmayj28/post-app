@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2019_11_23_122037) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "visitor_id"
-    t.integer "upvotes_count"
+    t.integer "upvotes_count", default: 0
     t.string "title"
   end
 
