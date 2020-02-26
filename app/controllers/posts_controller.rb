@@ -2,8 +2,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :destroy]
 
   def index
-    @posts = Post.all
-    render json: @posts, status: :ok
+    service = post_index_service
+    if service.perform
+      render status: :ok, json: service.result
+    else
+      render_400 service.errors
+    end
   end
 
   def show
@@ -30,6 +34,10 @@ class PostsController < ApplicationController
   end
 
   def post_create_params
-    params.fetch(:post, {}).permit(:content)
+    params.fetch(:post, {}).permit(:content, :title, :visitor_id)
+  end
+
+  def post_index_service
+    service = PostIndexService.new();
   end
 end
