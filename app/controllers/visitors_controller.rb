@@ -1,5 +1,5 @@
 class VisitorsController < ApplicationController
-  before_action :set_visitor, only: [:show, :destroy]
+  before_action :set_visitor, only: [:show, :destroy, :list_posts]
 
   def index
     @visitors = Visitor.all
@@ -7,7 +7,11 @@ class VisitorsController < ApplicationController
   end
 
   def show
-    render json: @visitor
+    render json: @visitor.attributes.merge({upvoted_posts: @visitor.upvotes.pluck(:post_id)})
+  end
+
+  def list_posts
+    render json: {upvoted_posts: @visitor.upvotes.pluck(:post_id)}
   end
 
   def create
