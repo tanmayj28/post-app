@@ -2,8 +2,7 @@ class PostIndexService
   attr_reader :result
 
   def perform
-    get_all_posts &&
-      add_visitor &&
+    add_visitor &&
       set_result
   end
 
@@ -11,13 +10,10 @@ class PostIndexService
 
   attr_accessor :posts
 
-  def get_all_posts
-    @posts = Post.includes(:visitor).all
-  end
-
   def add_visitor
-    posts.each do |post|
-      post.visitor_name = post.visitor.name
+    @posts = []
+    Post.includes(:visitor).all.each do |post|
+      @posts << post.attributes.merge({visitor_name: post.visitor.name,upvotes_count: post.upvotes.count})
     end
   end
 
